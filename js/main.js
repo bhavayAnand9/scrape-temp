@@ -2,7 +2,7 @@
 //to deal with cors
 const topAppsurl = "https://play.google.com/store/apps/collection/topselling_free?clp=ChcKFQoPdG9wc2VsbGluZ19mcmVlEAcYAw%3D%3D:S:ANO1ljLwMrI&gsr=ChkKFwoVCg90b3BzZWxsaW5nX2ZyZWUQBxgD:S:ANO1ljIxP20";
 
-//set because all elements will always be unique
+//set because all elements will always be unique and helps in checking of new items in o(1) complexity
 let dataset = new Set();
 
 //to keep track of new items
