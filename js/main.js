@@ -1,5 +1,4 @@
 
-//to deal with cors
 const topAppsurl = "https://play.google.com/store/apps/collection/topselling_free?clp=ChcKFQoPdG9wc2VsbGluZ19mcmVlEAcYAw%3D%3D:S:ANO1ljLwMrI&gsr=ChkKFwoVCg90b3BzZWxsaW5nX2ZyZWUQBxgD:S:ANO1ljIxP20";
 
 //set because all elements will always be unique and helps in checking of new items in o(1) complexity
@@ -10,11 +9,12 @@ let titleDataSet = new Set();
 
 //runs when document is ready and loaded into DOM
 function ready() {
+  //to deal with cors
   $.getJSON('http://www.whateverorigin.org/get?url=' + encodeURIComponent(topAppsurl) + '&callback=?', function(data){
     let t = $(data.contents).find('div.Vpfmgd');
      for(let i=0; i<t.length; i++){
        let item = {
-         link: $(t[i]).find('a.poRVub').attr('href'),
+         link: $(t[i]).find('a.poRVub').attr('href').split('?')[1],
          img: $(t[i]).find('img.T75of').attr('data-src'),
          title: $(t[i]).find('div.WsMG1c').text(),
        };
@@ -35,7 +35,7 @@ function buildUpWebPage(){
                 <div class="card-body">
                     <img src="${datasetArray[i].img}" class="card-img-top" alt="...">
                     <h5 class="card-title">${datasetArray[i].title}</h5>
-                    <a href=${datasetArray[i].link} class="card-link">More Details</a>
+                    <a href='/myPAT/details.html?${datasetArray[i].link}' class="card-link">More Details</a>
                 </div>
             </div>
         </div>
@@ -57,7 +57,7 @@ function appendNewParticularChildrens(newItems) {
                 <div class="card-body">
                     <img src="${newItemsArray[i].img}" class="card-img-top" alt="...">
                     <h5 class="card-title">${newItemsArray[i].title}</h5>
-                    <a href=${newItemsArray[i].link} class="card-link">More Details</a>
+                    <a href='/myPAT/details.html?${newItemsArray[i].link}' class="card-link">More Details</a>
                 </div>
             </div>
         </div>
@@ -76,7 +76,7 @@ function resetData(){
     let t = $(data.contents).find('div.Vpfmgd');
     for(let i=0; i<t.length; i++){
       let item = {
-        link: $(t[i]).find('a.poRVub').attr('href'),
+        link: $(t[i]).find('a.poRVub').attr('href').split('?')[1],
         img: $(t[i]).find('img.T75of').attr('data-src'),
         title: $(t[i]).find('div.WsMG1c').text(),
       };
